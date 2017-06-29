@@ -12,8 +12,8 @@ public class MainActivity extends AppCompatActivity {
 
     private final String TAG = MainActivity.class.getSimpleName();
 
-    private String API_KEY = "39955468c7a8c0cef1.68322505";
-    private String SITE_ID = "709651";
+    private String API_KEY = "api_key";
+    private String SITE_ID = "site_id";
 
     private MerchantService CINETPAY_MERCHANT = new MerchantService(API_KEY, SITE_ID);
 
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         cinetPayUI.beginPayment(purchase);
 
-        // Consulter le solde disponible
+        // Voir le compte
         //cinetPayUI.showAccountDialog();
     }
 }
