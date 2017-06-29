@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cinetpay_lyt_inflation"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <View
+        android:id="@+id/cinetpay_vw_separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#CCC"
+        android:visibility="visible" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/cinetpay_txt_merchant_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/cinetpay_merchant_label"
+            android:textColor="#444" />
+
+        <ImageView
+            android:id="@+id/cinetpay_img_merchant_inflater"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/cinetpay_more"
+            android:layout_gravity="end|top"
+            android:layout_margin="4dp"
+            android:background="#DDD" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/cinetpay_txt_pay_way"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="@string/cinetpay_payment_method_label"
+        android:textColor="#e0001b"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/cinetpay_txt_pay_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="@string/cinetpay_description_label"
+        android:textColor="#444" />
+
+    <View
+        android:id="@id/cinetpay_vw_separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="4dp"
+        android:background="#CCC"
+        android:visibility="visible" />
+
+</LinearLayout>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0f0f0"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|center">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="25dp"
+                    android:orientation="vertical">
+
+                    <View
+                        android:id="@+id/cinetpay_view2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="4dp" />
+
+                    <include
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        layout="@layout/cinetpay_include_inflation_pay_details" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="4dp"
+                        android:paddingTop="2dp">
+
+                        <TextView
+                            android:id="@+id/cinetpay_txt_amount_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:text="@string/cinetpay_amount_label"
+                            android:textColor="#444"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:id="@+id/cinetpay_txt_amount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:textColor="#3dac62"
+                            android:textSize="25sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/cinetpay_TextView04"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:text="@string/cinetpay_phone_label"
+                            android:textColor="#444"
+                            android:textSize="25sp" />
+
+                        <EditText
+                            android:id="@+id/cinetpay_edt_phone"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:hint="@string/cinetpay_phone_hint"
+                            android:inputType="phone"
+                            android:textColor="#3dac62"
+                            android:textSize="25sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/cinetpay_txt_title"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:maxLines="1"
+                android:padding="4dp"
+                android:text="@string/cinetpay_make_donation"
+                android:textColor="#444"
+                android:textSize="25sp" />
+
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/cinetpay_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/cinetpay_cancel" />
+
+        <ImageView
+            android:id="@+id/cinetpay_inflate_deflate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginRight="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/cinetpay_inflate" />
+
+    </FrameLayout>
+
+    <View
+        android:id="@+id/cinetpay_vw_separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#CCC"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/cinetpay_cinetpay_image"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_weight="0.3"
+            android:adjustViewBounds="false"
+            android:src="@drawable/cinetpay_icon2"
+            android:visibility="visible" />
+
+        <View
+            android:id="@+id/cinetpay_view1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.21" />
+
+        <Button
+            android:id="@+id/cinetpay_btn_continue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center"
+            android:enabled="false"
+            android:text="@string/cinetpay_continue" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">CinetPay Android SDK</string>
+    <string name="cinetpay_pay">Payer</string>
+    <string name="cinetpay_otp_code_hint">Code OTP</string>
+    <string name="cinetpay_phone_hint">Numéro de téléphone</string>
+    <string name="cinetpay_cinetpay">CinetPay</string>
+    <string name="cinetpay_mtn_mobile_money">MTN Mobile Money</string>
+    <string name="cinetpay_orange_money">Orange Money</string>
+    <string name="cinetpay_merchant_name_hint">Nom du marchand</string>
+    <string name="cinetpay_via_label">Via:</string>
+    <string name="cinetpay_otp_label">Code OTP:</string>
+    <string name="cinetpay_make_donation">Faire un don</string>
+    <string name="cinetpay_amount_label">Montant:</string>
+    <string name="cinetpay_phone_label">Téléphone:</string>
+    <string name="cinetpay_continue">Continuer</string>
+    <string name="cinetpay_merchant_label">Marchand:</string>
+    <string name="cinetpay_payment_method_label">Mode de paiement:</string>
+    <string name="cinetpay_description_label">Description:</string>
+    <string name="cinetpay_cel_label">Cel:</string>
+    <string name="cinetpay_verify">Vérifier paiement</string>
+
+    <string-array name="lst_type_ouvrage">
+        <item>Orange</item>
+        <item>MTN</item>
+    </string-array>
+</resources>
