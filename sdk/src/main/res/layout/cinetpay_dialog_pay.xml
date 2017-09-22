@@ -111,7 +111,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="end"
-                            android:hint="@string/cinetpay_otp_code_hint"
                             android:inputType="phone"
                             android:textColor="#f68121"
                             android:textSize="25sp" />
@@ -157,6 +156,13 @@
 
     </FrameLayout>
 
+    <TextView
+        android:id="@+id/cinetpay_operator_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textColor="@android:color/holo_blue_dark" />
+
     <View
         android:id="@+id/cinetpay_vw_separator"
         android:layout_width="match_parent"
@@ -193,7 +199,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center"
-            android:text="@string/cinetpay_pay" />
+            android:text="@string/cinetpay_pay"
+            android:enabled="false" />
 
     </LinearLayout>
 

@@ -156,6 +156,11 @@ public final class MerchantService {
         public String credit_serv;
         public String debit_serv;
         public String[] status_code_message = new String[] { "1024", "NOT_VERIFIED" };
+		public String syntax_operator_new_om;
+        public String syntax_operator_new_momo;
+        public String message_operator_om;
+        public String message_operator_momo;
+        public String message_operator_moov;
 
 		public String getActivated_at() {
 			return activated_at;

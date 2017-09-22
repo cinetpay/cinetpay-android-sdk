@@ -21,7 +21,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -111,65 +110,6 @@ public final class PayUI {
 		mCallBack = callBack;
 		return beginPayment(purchase, plugin);
 
-	}
-
-	Dialog showDialogExclamation(String title) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(CONTEXT);
-		String text_s = "";
-		if (mPurchase.getPaymentMethod().equals(
-				Purchase.PAYMENT_METHOD_ORANGE_MONEY))
-			text_s = "<b>CONSIGNES POUR PAYER VIA ORANGE MONEY :</b><br><br><p style=\"font-size:17px\"> <b>1°)</b> Cliquer sur le bouton <b>OK</b>, entrez votre <b>CODE SECRET</b> Orange Money en lieu et place des chiffres <b>0000</b> dans la chaine suivante <b>"
-					+ Settings.getOrangeUssdSyntax()
-					+ "</b><br><br> <b>2°)</b> Une fois votre <b>CODE SECRET</b> Orange Money entré veuillez lancer l'appel pour obtenir le <b>code OTP</b> (Quatre (4) chiffres).<br><br> <b>3°)</b> Une fois le <b>code OTP</b> obtenu, veuillez le relever ou le retenir puis le saisir dans la zone de texte du <b>code OTP</b> et cliquez sur le bouton <b>Continuer</b> </p>";
-		if (mPurchase.getPaymentMethod().equals(
-				Purchase.PAYMENT_METHOD_MTN_MOBILE_MONEY)) {
-			text_s = "<b>CONSIGNES POUR PAYER VIA MTN MOBILE MONEY :</b><br><br><p style=\"font-size:17px\"><b>1°)</b> En cliquant sur le bouton <b>OK</b>, vous allez obtenir un <b>Token</b> qui est un code de cinq (5) chiffres. <br><br> <b>2°)</b> Une fois le <b>Token</b> obtenu, veuillez relever ou le retenir puis le saisir dans la zone de texte du <b>Token</b> et cliquez sur le bouton <b>Continuer</b> </p>";
-		}
-		TextView textV = new TextView(CONTEXT);
-		textV.setText(Html.fromHtml(text_s));
-		textV.setPadding(10, 10, 10, 10);
-		textV.setTextSize(17);
-		textV.setBackgroundColor(0xFFf0f0f0);
-		textV.setScrollContainer(true);
-		ScrollView scrol = new ScrollView(CONTEXT);
-		scrol.addView(textV);
-		builder.setView(scrol);
-		builder
-				// .setTitle(title).setIcon(R.drawable.cinetpay_icon_mini)
-				.setCancelable(false)
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						if (mPurchase.getPaymentMethod().equals(
-								Purchase.PAYMENT_METHOD_ORANGE_MONEY)) {
-							ToolKit.phoneDial(Settings.getOrangeUssdSyntax(),
-									CONTEXT);
-							toast("Remplacer 0000 par votre CODE SECRET et lancer l'Appel avec votre Puce ORANGE pour continuer. Merci.");
-						}
-						if (mPurchase.getPaymentMethod().equals(
-								Purchase.PAYMENT_METHOD_MTN_MOBILE_MONEY)) {
-							String call = Settings.getMtnUssdSyntax();
-							if (isCurrentPhoneAsMine()) {
-								ToolKit.phoneCall(call, CONTEXT);
-							} else {
-								toast("Lancer l'Appel avec votre Puce MTN pour continuer. Merci.");
-								ToolKit.phoneDial(call, CONTEXT);
-							}
-						} else
-							dialog.cancel();
-					}
-				})
-				.setNegativeButton("Annuler",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-							}
-						});
-		AlertDialog alert = builder.create();
-		// if(!((Activity)(context)).isDestroyed())
-		try {
-			alert.show();
-		} catch (Exception e) {
-		}
-		return alert;
 	}
 
 	boolean hasUserAgreement() {
@@ -346,7 +286,7 @@ public final class PayUI {
 		EditText edt_otp;
 		SmsWatcher mSmsWatcher;
 		Button btn_continue;
-		TextView txt_phone, txt_pay_way_view, txt_otp;
+		TextView txt_phone, txt_pay_way_view, txt_otp, txt_operator_message;
 
 		public PayDialog() {
 			// TODO Auto-generated constructor stub
@@ -354,24 +294,56 @@ public final class PayUI {
 
 		@Override
 		void linkToXml() {
-			// TODO Auto-generated method stub
 			setContentView(R.layout.cinetpay_dialog_pay);
-			edt_otp = (EditText) findViewById(R.id.cinetpay_edt_otp);
-			btn_continue = (Button) findViewById(R.id.cinetpay_pay);
-			txt_phone = (TextView) findViewById(R.id.cinetpay_txt_phone);
-			txt_otp = (TextView) findViewById(R.id.cinetpay_txt_otp);
-			txt_pay_way_view = (TextView) findViewById(R.id.cinetpay_txt_pay_way_view);
+			edt_otp = findViewById(R.id.cinetpay_edt_otp);
+			btn_continue = findViewById(R.id.cinetpay_pay);
+			txt_phone = findViewById(R.id.cinetpay_txt_phone);
+			txt_otp = findViewById(R.id.cinetpay_txt_otp);
+			txt_pay_way_view = findViewById(R.id.cinetpay_txt_pay_way_view);
+            txt_operator_message = findViewById(R.id.cinetpay_operator_message);
 			super.linkToXml();
 		}
 
 		@Override
 		void onInit() {
-			// TODO Auto-generated method stub
 			super.onInit();
-			if (mPurchase.getPaymentMethod().equals(
-					Purchase.PAYMENT_METHOD_MOOV_FLOOZ)) {
+
+            MerchantService.ServiceInfo serviceInfo = mMerchant.getInfo();
+
+            if (mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_ORANGE_MONEY)) {
+
+                String message_operator = serviceInfo.message_operator_om.replace("\n", "")
+                        .replace("\t", "").replace("d autorisation", "d'autorisation")
+                        .replace("l appel", "l'appel").replace("TOKEN", "code d'autorisation")
+                        .replace("telephone", "téléphone");
+
+                String message = message_operator.replace("%s", "<b>" + serviceInfo.syntax_operator_new_om + "</b>");
+
+                txt_operator_message.setText(Html.fromHtml(message));
+
+            } else if (mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_MTN_MOBILE_MONEY)) {
+
+                String message_operator = serviceInfo.message_operator_momo.replace("\n", "")
+                        .replace("\t", "").replace("d autorisation", "d'autorisation")
+                        .replace("l appel", "l'appel").replace("TOKEN", "code d'autorisation")
+                        .replace("telephone", "téléphone");
+
+                String message = message_operator.replace("%s", "<b>" + serviceInfo.syntax_operator_new_momo + "</b>");
+
+                txt_operator_message.setText(Html.fromHtml(message));
+
+            } else if (mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_MOOV_FLOOZ)) {
 				edt_otp.setText("0000");
+
+                String message_operator = serviceInfo.message_operator_moov.replace("\n", "")
+                        .replace("\t", "").replace("d autorisation", "d'autorisation")
+                        .replace("l appel", "l'appel").replace("TOKEN", "code d'autorisation")
+                        .replace("telephone", "téléphone");
+
+                txt_operator_message.setText(message_operator);
 			}
+
+            btn_continue.setText(getPrefixPayButton() + mPurchase.getAmount() + mPurchase.getCurrency());
 		}
 
 		@Override
@@ -432,37 +404,61 @@ public final class PayUI {
 
 			txt_pay_way_view.setTextColor(color);
 			txt_phone.setTextColor(color);
-			if (mPurchase.getPaymentMethod().equals(
-					Purchase.PAYMENT_METHOD_MTN_MOBILE_MONEY)
-					&& getOtp().length() < 5
-					|| mPurchase.getPaymentMethod().equals(
-					Purchase.PAYMENT_METHOD_ORANGE_MONEY)
-					&& getOtp().length() < 4)
-				btn_continue
-						.setText(mPurchase.getPaymentMethod().equals(
-								Purchase.PAYMENT_METHOD_MTN_MOBILE_MONEY) ? "Obtenir un Token"
-								: "Obtenir code OTP");
-			txt_phone.setText(mPurchase.getCustomer().getPhone());
-			txt_pay_way_view.setText(CinetPay.getPaymentMap(CONTEXT).get(
-					mPurchase.getPaymentMethod()));
-			edt_otp.setHint(mPurchase.getPaymentMethod().equals(
-					Purchase.PAYMENT_METHOD_ORANGE_MONEY) ? "Code OTP..."
-					: "Token...");
-			txt_otp.setText(mPurchase.getPaymentMethod().equals(
-					Purchase.PAYMENT_METHOD_ORANGE_MONEY) ? "Code OTP:"
-					: "Token:");
 
+            btn_continue.setText(getPrefixPayButton() + mPurchase.getAmount()
+                    + mPurchase.getCurrency());
+
+            MerchantService.ServiceInfo serviceInfo = mMerchant.getInfo();
+
+            if (mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_ORANGE_MONEY)) {
+
+                String message_operator = serviceInfo.message_operator_om.replace("\n", "")
+                        .replace("\t", "").replace("d autorisation", "d'autorisation")
+                        .replace("l appel", "l'appel").replace("TOKEN", "code d'autorisation")
+                        .replace("telephone", "téléphone");
+
+                String message = message_operator.replace("%s", "<b>" + serviceInfo.syntax_operator_new_om + "</b>");
+
+                txt_operator_message.setText(Html.fromHtml(message));
+
+            } else if (mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_MTN_MOBILE_MONEY)) {
+
+                String message_operator = serviceInfo.message_operator_momo.replace("\n", "")
+                        .replace("\t", "").replace("d autorisation", "d'autorisation")
+                        .replace("l appel", "l'appel").replace("TOKEN", "code d'autorisation")
+                        .replace("telephone", "téléphone");
+
+                String message = message_operator.replace("%s", "<b>" + serviceInfo.syntax_operator_new_momo + "</b>");
+
+                txt_operator_message.setText(Html.fromHtml(message));
+
+            } else {
+                String message_operator = serviceInfo.message_operator_moov.replace("\n", "")
+                        .replace("\t", "").replace("d autorisation", "d'autorisation")
+                        .replace("l appel", "l'appel").replace("TOKEN", "code d'autorisation")
+                        .replace("telephone", "téléphone");
+
+                txt_operator_message.setText(message_operator);
+            }
+
+			if ((mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_MTN_MOBILE_MONEY)
+                    && getOtp().length() < 5)
+                    || (mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_ORANGE_MONEY)
+                    && getOtp().length() < 4)) {
+				btn_continue.setEnabled(false);
+			} else {
+                btn_continue.setEnabled(true);
+            }
+			txt_phone.setText(mPurchase.getCustomer().getPhone());
+			txt_pay_way_view.setText(CinetPay.getPaymentMap(CONTEXT).get(mPurchase.getPaymentMethod()));
 		}
 
 		@Override
 		void addListener() {
-			// TODO Auto-generated method stub
 			super.addListener();
 			View.OnClickListener oncl = new View.OnClickListener() {
-
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
 					CinetPayUISecurity.checkPayUIPayIntegrity(mPayDialog);
 					if (v.getId() == R.id.cinetpay_pay) {
 						mPurchase.getCustomer().setOtpCode(getOtp());
@@ -470,60 +466,37 @@ public final class PayUI {
 							userAgreement = true;
 							processPayment();
 							userAgreement = false;
-						} else {
-							if (mPurchase.getPaymentMethod().equals(
-									Purchase.PAYMENT_METHOD_ORANGE_MONEY))
-
-								showDialogExclamation("CODE OTP");
-							if (mPurchase.getPaymentMethod().equals(
-									Purchase.PAYMENT_METHOD_MTN_MOBILE_MONEY))
-								showDialogExclamation("TOKEN");
-
 						}
 					}
 					if (v.getId() == R.id.cinetpay_txt_pay_way_view) {
 						switchPayMode();
-
 					}
 					if (v.getId() == R.id.cinetpay_edt_otp) {
-						if (isDetailVisible())
-							showDetail(false);
-
+						if (isDetailVisible()) {
+                            showDetail(false);
+                        }
 					}
 				}
-
 			};
 			btn_continue.setOnClickListener(oncl);
 			edt_otp.setOnClickListener(oncl);
 			edt_otp.addTextChangedListener(new TextWatcher() {
-
 				@Override
-				public void onTextChanged(CharSequence s, int start,
-										  int before, int count) {
-					// TODO Auto-generated method stub
+				public void onTextChanged(CharSequence s, int start, int before, int count) {
 					boolean otpOk = otpFieldIsOk();
-					int maxleght = 5;
+					int maxlength = 5;
 					if (otpOk) {
-						maxleght = s.length();
-						btn_continue.setText(getPrefixPayButton()
-								+ mPurchase.getAmount()
-								+ mPurchase.getCurrency());
-
+						maxlength = s.length();
+						btn_continue.setEnabled(true);
 					} else {
-						btn_continue
-								.setText(mPurchase.getPaymentMethod().equals(
-										Purchase.PAYMENT_METHOD_ORANGE_MONEY) ? "Obtenir Code OTP"
-										: "Obtenir un Token");
+						btn_continue.setEnabled(false);
 					}
-					edt_otp.setFilters(new InputFilter[] { new InputFilter.LengthFilter(
-							maxleght) });
+					edt_otp.setFilters(new InputFilter[] { new InputFilter.LengthFilter(maxlength) });
 				}
 
 				@Override
-				public void beforeTextChanged(CharSequence s, int start,
-											  int count, int after) {
+				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 					// TODO Auto-generated method stub
-
 				}
 
 				@Override
@@ -533,7 +506,6 @@ public final class PayUI {
 						showDetail(false);
 				}
 			});
-
 		}
 
 		private String getOtp() {
@@ -741,8 +713,7 @@ public final class PayUI {
 
 		private void inflateMarchantDetails() {
 			MerchantService service = cinetPay.getCurrentMerchant();
-			img_merchant_inflater
-					.setImageResource(R.drawable.cinetpay_less);
+			img_merchant_inflater.setImageResource(R.drawable.cinetpay_less);
 			txt_merchant.setText(HEADER_SERVICE
 					+ ToolKit.Word.begginByUperCase(service.getName())
 					+ "\nEmail: " + service.getInfo().getEmail()
@@ -750,11 +721,6 @@ public final class PayUI {
 					+ ", " + service.getInfo().getRegion() + "\nDescription: "
 					+ service.getInfo().getDescription());
 			txt_merchant.setBackgroundColor(0xFFe0e0e0);
-			/*
-			 * cpm_site_id, id_serv, id_clt_fk, nom_serv = "MARCHANT CINETPAY",
-			 * description_serv, pays_serv, ville_serv, email_serv, created_at,
-			 * updated_at, activated_at, solde_serv, credit_serv, debit_serv
-			 */
 		}
 
 		private void deflateMarchantDetails() {

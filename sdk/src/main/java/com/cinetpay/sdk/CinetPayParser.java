@@ -169,6 +169,11 @@ public final class CinetPayParser {
 		info.credit_serv = json.getString("credit_serv");
 		info.debit_serv = json.getString("debit_serv");
 		info.email_serv = json.getString("email_serv");
+		info.syntax_operator_new_om = json.getJSONObject("syntaxe_operator_new_sdk").getString("OM");
+        info.syntax_operator_new_momo = json.getJSONObject("syntaxe_operator_new_sdk").getString("MOMO");
+        info.message_operator_om = json.getJSONObject("message_operator").getString("OM");
+        info.message_operator_momo = json.getJSONObject("message_operator").getString("MOMO");
+        info.message_operator_moov = json.getJSONObject("message_operator").getString("FLOOZ");
 
 		return info;
 	}
