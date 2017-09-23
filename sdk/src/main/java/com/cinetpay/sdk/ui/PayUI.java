@@ -315,9 +315,11 @@ public final class PayUI {
                 String message_operator = serviceInfo.message_operator_om.replace("\n", "")
                         .replace("\t", "").replace("d autorisation", "d'autorisation")
                         .replace("l appel", "l'appel").replace("TOKEN", "code d'autorisation")
-                        .replace("telephone", "téléphone");
+                        .replace("telephone", "téléphone")
+                        .replace("ORANGE", "<b><font color=\"black\">ORANGE</font></b>");
 
-                String message = message_operator.replace("%s", "<b>" + serviceInfo.syntax_operator_new_om + "</b>");
+                String message = message_operator.replace("%s", "<b><font color=\"black\">"
+						+ serviceInfo.syntax_operator_new_om + "</font></b>");
 
                 txt_operator_message.setText(Html.fromHtml(message));
 
@@ -326,9 +328,11 @@ public final class PayUI {
                 String message_operator = serviceInfo.message_operator_momo.replace("\n", "")
                         .replace("\t", "").replace("d autorisation", "d'autorisation")
                         .replace("l appel", "l'appel").replace("TOKEN", "code d'autorisation")
-                        .replace("telephone", "téléphone");
+                        .replace("telephone", "téléphone")
+                        .replace("MTN", "<b><font color=\"black\">MTN</font></b>");
 
-                String message = message_operator.replace("%s", "<b>" + serviceInfo.syntax_operator_new_momo + "</b>");
+                String message = message_operator.replace("%s", "<b><font color=\"black\">"
+                        + serviceInfo.syntax_operator_new_momo + "</font></b>");
 
                 txt_operator_message.setText(Html.fromHtml(message));
 
@@ -338,7 +342,8 @@ public final class PayUI {
                 String message_operator = serviceInfo.message_operator_moov.replace("\n", "")
                         .replace("\t", "").replace("d autorisation", "d'autorisation")
                         .replace("l appel", "l'appel").replace("TOKEN", "code d'autorisation")
-                        .replace("telephone", "téléphone");
+                        .replace("telephone", "téléphone")
+                        .replace("MOOV", "<b><font color=\"black\">MOOV</font></b>");
 
                 txt_operator_message.setText(message_operator);
 			}
@@ -415,9 +420,11 @@ public final class PayUI {
                 String message_operator = serviceInfo.message_operator_om.replace("\n", "")
                         .replace("\t", "").replace("d autorisation", "d'autorisation")
                         .replace("l appel", "l'appel").replace("TOKEN", "code d'autorisation")
-                        .replace("telephone", "téléphone");
+                        .replace("telephone", "téléphone")
+                        .replace("ORANGE", "<b><font color=\"black\">ORANGE</font></b>");
 
-                String message = message_operator.replace("%s", "<b>" + serviceInfo.syntax_operator_new_om + "</b>");
+                String message = message_operator.replace("%s", "<b><font color=\"black\">"
+                        + serviceInfo.syntax_operator_new_om + "</font></b>");
 
                 txt_operator_message.setText(Html.fromHtml(message));
 
@@ -426,9 +433,11 @@ public final class PayUI {
                 String message_operator = serviceInfo.message_operator_momo.replace("\n", "")
                         .replace("\t", "").replace("d autorisation", "d'autorisation")
                         .replace("l appel", "l'appel").replace("TOKEN", "code d'autorisation")
-                        .replace("telephone", "téléphone");
+                        .replace("telephone", "téléphone")
+                        .replace("MTN", "<b><font color=\"black\">MTN</font></b>");
 
-                String message = message_operator.replace("%s", "<b>" + serviceInfo.syntax_operator_new_momo + "</b>");
+                String message = message_operator.replace("%s", "<b><font color=\"black\">"
+                        + serviceInfo.syntax_operator_new_momo + "</font></b>");
 
                 txt_operator_message.setText(Html.fromHtml(message));
 
@@ -436,7 +445,8 @@ public final class PayUI {
                 String message_operator = serviceInfo.message_operator_moov.replace("\n", "")
                         .replace("\t", "").replace("d autorisation", "d'autorisation")
                         .replace("l appel", "l'appel").replace("TOKEN", "code d'autorisation")
-                        .replace("telephone", "téléphone");
+                        .replace("telephone", "téléphone")
+                        .replace("MOOV", "<b><font color=\"black\">MOOV</font></b>");
 
                 txt_operator_message.setText(message_operator);
             }

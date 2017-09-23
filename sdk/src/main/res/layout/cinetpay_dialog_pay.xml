@@ -91,6 +91,14 @@
 
                     </LinearLayout>
 
+                    <TextView
+                        android:id="@+id/cinetpay_operator_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@android:color/holo_blue_dark"
+                        android:background="#F5F5F5" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -155,13 +163,6 @@
             android:src="@drawable/cinetpay_inflate" />
 
     </FrameLayout>
-
-    <TextView
-        android:id="@+id/cinetpay_operator_message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textColor="@android:color/holo_blue_dark" />
 
     <View
         android:id="@+id/cinetpay_vw_separator"
