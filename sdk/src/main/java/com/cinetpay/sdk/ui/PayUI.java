@@ -919,24 +919,18 @@ public final class PayUI {
 		return dialog;
 	}
 
-	private String createResponseMessage(PaymentResponse response,
-										 Purchase purchase) {
-		// TODO Auto-generated method stub
-		boolean hasCustomerName = response.hasBeenConfirmed()
-				&& purchase.getCustomer() != null
-				&& !TextUtils.isEmpty(purchase.getCustomer().getName());
-		String message = CinetPay
-				.getCinetPayMessage(
-						hasCustomerName ? "SUCCES_D" : response.getMessage())
-				.replace("$amount",
-						mPurchase.getAmount() + mPurchase.getCurrency())
-				.replace("$service", MERCHANT.getName());
-		message = (hasCustomerName ? message.replace("$name", purchase
-				.getCustomer().getName()) : message);
-		message = (!response.hasBeenAccepted() ? "Code: " + response.getCode()
-				+ "\n" : "")
-				+ message;
-		return message;
+	private String createResponseMessage(PaymentResponse response, Purchase purchase) {
+
+		boolean hasCustomerName = response.hasBeenConfirmed() && purchase.getCustomer() != null
+                && !TextUtils.isEmpty(purchase.getCustomer().getName());
+
+        String message = CinetPay.getCinetPayMessage(hasCustomerName ? "SUCCES_D" : response.getMessage())
+                .replace("$amount", mPurchase.getAmount() + mPurchase.getCurrency())
+                .replace("$service", MERCHANT.getName());
+
+        message = (hasCustomerName ? message.replace("$name", purchase.getCustomer().getName()) : message);
+
+        return message;
 	}
 
 	private void handleCinetPayHistoric(PaymentResponse response,
