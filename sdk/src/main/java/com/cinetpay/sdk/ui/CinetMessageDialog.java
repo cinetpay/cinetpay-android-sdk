@@ -38,12 +38,14 @@ class CinetMessageDialog extends Dialog {
                 cancel();
             }
         });
-		findViewById(R.id.cinetpay_retry).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cancel();
-            }
-        });
+        if (findViewById(R.id.cinetpay_retry) != null) {
+            findViewById(R.id.cinetpay_retry).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    cancel();
+                }
+            });
+        }
 	}
 
 	public void show(String text, boolean paymentAccepted) {
@@ -59,12 +61,13 @@ class CinetMessageDialog extends Dialog {
 	}
 
 	public void setRetry(boolean retry) {
-        findViewById(R.id.cinetpay_retry).setVisibility(retry ? View.VISIBLE : View.GONE);
+		if (findViewById(R.id.cinetpay_retry) != null) {
+			findViewById(R.id.cinetpay_retry).setVisibility(retry ? View.VISIBLE : View.GONE);
+		}
     }
 
 	@Override
 	public void setCancelable(boolean flag) {
-		// TODO Auto-generated method stub
 		super.setCancelable(flag);
 		findViewById(R.id.cinetpay_cancel).setVisibility(flag ? View.VISIBLE : View.INVISIBLE);
 	}

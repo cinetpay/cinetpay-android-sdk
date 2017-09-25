@@ -308,6 +308,8 @@ public final class PayUI {
 		void onInit() {
 			super.onInit();
 
+            edt_otp.setText("");
+
             MerchantService.ServiceInfo serviceInfo = mMerchant.getInfo();
 
             if (mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_ORANGE_MONEY)) {
@@ -337,7 +339,6 @@ public final class PayUI {
                 txt_operator_message.setText(Html.fromHtml(message));
 
             } else if (mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_MOOV_FLOOZ)) {
-				edt_otp.setText("0000");
 
                 String message_operator = serviceInfo.message_operator_moov.replace("\n", "")
                         .replace("\t", "").replace("d autorisation", "d'autorisation")
@@ -382,6 +383,9 @@ public final class PayUI {
 		void refreshInflation() {
 			// TODO Auto-generated method stub
 			super.refreshInflation();// e0001b
+
+            edt_otp.setText("");
+
 			txt_pay_way_view.setText(CinetPay.getPaymentMap(CONTEXT).get(
 					mPurchase.getPaymentMethod()));
 			int color = 0xFFf68121;
@@ -822,10 +826,11 @@ public final class PayUI {
 	private void processPayment() {
 		mInitDialog.setOnCancelListener(null);
 		mPayDialog.setOnCancelListener(null);
-		//mInitDialog.cancel();
-		//mPayDialog.cancel();
-		UI.showCinetProgressDialog(CinetPayText.pay_in_process).setCancelable(
-				false);
+		if (mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_MOOV_FLOOZ)) {
+            mInitDialog.cancel();
+            mPayDialog.cancel();
+        }
+		UI.showCinetProgressDialog(CinetPayText.pay_in_process).setCancelable(false);
 		mPayDialog.unregisterSmsWatcher();
 		if (mPayDialog.mSmsWatcher != null) {
 			mPayDialog.mSmsWatcher.unregisterSmsListener();
@@ -913,7 +918,8 @@ public final class PayUI {
 				// Log.d("callback is NULL", "" + response);
 			}
 			if (!response.isWaiting()) {
-                if (response.hasBeenAccepted()) {
+                if (response.hasBeenAccepted()
+                        || mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_MOOV_FLOOZ)) {
                     mInitDialog.cancel();
                     mPayDialog.cancel();
                 }
