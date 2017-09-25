@@ -217,8 +217,7 @@ public final class TPEPayDialog extends BaseDialog implements
 							"phone", getPhone(), 0);
 			} else {
 				ToolKit.vibrate(mContext, 90);
-				new CinetMessageDialog(getContext()).show(CinetPay
-						.getCinetPayMessage("NETWORK_ERROR_EXPLICIT"));
+				new CinetMessageDialog(getContext()).show(CinetPay.getCinetPayMessage("NETWORK_ERROR_EXPLICIT"), false);
 			}
 
 		}
@@ -308,8 +307,7 @@ public final class TPEPayDialog extends BaseDialog implements
 			@Override
 			public void onPurchaseComplete(PaymentResponse response,
 										   Purchase purchase) {
-				// TODO Auto-generated method stub
-				messageD.show(CinetPay.getCinetPayMessage(response.getMessage()));
+				messageD.show(CinetPay.getCinetPayMessage(response.getMessage()), false);
 				progresD.cancel();
 				mUI.cancelSafeMode();
 				if (mCallBack != null)

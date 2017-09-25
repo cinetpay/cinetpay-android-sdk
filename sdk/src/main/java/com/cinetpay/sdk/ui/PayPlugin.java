@@ -25,8 +25,7 @@ public abstract class PayPlugin {
 	public abstract boolean needUIValidator();
 
 	protected final void showCinetMessageDialog(String string) {
-		// TODO Auto-generated method stub
-		ui.showCinetMessageDialog(string);
+		ui.showCinetMessageDialog(string, false);
 	}
 
 	protected final Dialog showCinetProgressDialog(String string, boolean b) {

@@ -48,8 +48,7 @@ final class AccountCheckDialog extends BaseDialog {
 					mMerchant.getName(), MAX_MARCHANT_LENGTH));
 		} else {
 			this.cancel();
-			new CinetMessageDialog(getContext()).show(CinetPay
-					.getCinetPayMessage("NETWORK_ERROR"));
+			new CinetMessageDialog(getContext()).show(CinetPay.getCinetPayMessage("NETWORK_ERROR"), false);
 		}
 	}
 

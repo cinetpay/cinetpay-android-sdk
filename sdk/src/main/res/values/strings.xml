@@ -18,6 +18,7 @@
     <string name="cinetpay_description_label">Description:</string>
     <string name="cinetpay_cel_label">Cel:</string>
     <string name="cinetpay_verify">Vérifier paiement</string>
+    <string name="cinetpay_retry">Réessayer</string>
 
     <string-array name="lst_type_ouvrage">
         <item>Orange</item>

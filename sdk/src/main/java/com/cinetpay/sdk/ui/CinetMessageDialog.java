@@ -29,30 +29,38 @@ class CinetMessageDialog extends Dialog {
 	}
 
 	private void init(int ressource) {
-		// TODO Auto-generated method stub
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(ressource);
 		setCanceledOnTouchOutside(false);
-		findViewById(R.id.cinetpay_cancel).setOnClickListener(
-				new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						cancel();
-					}
-				});
+		findViewById(R.id.cinetpay_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancel();
+            }
+        });
+		findViewById(R.id.cinetpay_retry).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancel();
+            }
+        });
 	}
 
-	public void show(String text) {
-		// TODO Auto-generated method stub
-		if (!isShowing())
-			super.show();
+	public void show(String text, boolean paymentAccepted) {
+		if (!isShowing()) {
+            super.show();
+        }
 		setMessage(text);
+        setRetry(paymentAccepted);
 	}
 
 	public void setMessage(String message) {
 		((TextView) findViewById(R.id.cinetpay_txt_message)).setText(message);
 	}
+
+	public void setRetry(boolean retry) {
+        findViewById(R.id.cinetpay_retry).setVisibility(retry ? View.VISIBLE : View.GONE);
+    }
 
 	@Override
 	public void setCancelable(boolean flag) {

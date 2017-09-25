@@ -115,10 +115,9 @@ public final class CinetPayUI {
 							mPayUI.beginPayment(null, purchase, callBack);
 						} else {
 							restorOrientation();
-							showCinetMessageDialog(infos != null ? CinetPay
-									.getCinetPayMessage(infos
-											.getMerchantStatus()) : CinetPay
-									.getCinetPayMessage("NETWORK_ERROR"));
+							showCinetMessageDialog(infos != null
+                                    ? CinetPay.getCinetPayMessage(infos.getMerchantStatus())
+                                    : CinetPay.getCinetPayMessage("NETWORK_ERROR"), false);
 						}
 					}
 				});
@@ -361,10 +360,9 @@ public final class CinetPayUI {
 							PurchaseTransaction transaction, boolean success) {
 						// TODO Auto-generated method stub
 						if (transaction != null)
-							msgD.show(transaction.toString());
+							msgD.show(transaction.toString(), false);
 						else
-							msgD.show(CinetPay
-									.getCinetPayMessage("NETWORK_ERROR"));
+							msgD.show(CinetPay.getCinetPayMessage("NETWORK_ERROR"), false);
 						progresD.cancel();
 						if (callback != null)
 							callback.onCheckComplete(transaction, success);
@@ -401,11 +399,12 @@ public final class CinetPayUI {
 		return currentProgressDialog;
 	}
 
-	Dialog showCinetMessageDialog(String msg, boolean recreateDialog) {
+	Dialog showCinetMessageDialog(String msg, boolean recreateDialog, boolean paymentAccepted) {
 		if (recreateDialog || currentMessageDialog == null
-				|| currentMessageDialog instanceof CinetWaitingDialog)
-			currentMessageDialog = new CinetMessageDialog(mActivity);
-		currentMessageDialog.show(msg);
+                || currentMessageDialog instanceof CinetWaitingDialog) {
+            currentMessageDialog = new CinetMessageDialog(mActivity);
+        }
+		currentMessageDialog.show(msg, paymentAccepted);
 		return currentMessageDialog;
 	}
 
@@ -413,7 +412,7 @@ public final class CinetPayUI {
 		if (recreateDialog || currentMessageDialog == null
 				|| !(currentMessageDialog instanceof CinetWaitingDialog))
 			currentMessageDialog = new CinetWaitingDialog(p);
-		currentMessageDialog.show(msg);
+		currentMessageDialog.show(msg, false);
 		return currentMessageDialog;
 	}
 
@@ -421,8 +420,8 @@ public final class CinetPayUI {
 		return showCinetProgressDialog(msg, true);
 	}
 
-	Dialog showCinetMessageDialog(String msg) {
-		return showCinetMessageDialog(msg, true);
+	Dialog showCinetMessageDialog(String msg, boolean paymentAccepted) {
+		return showCinetMessageDialog(msg, true, paymentAccepted);
 	}
 
 	Dialog showCinetWaitingDialog(String msg, Purchasable p) {

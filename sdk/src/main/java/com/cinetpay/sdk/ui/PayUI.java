@@ -822,8 +822,8 @@ public final class PayUI {
 	private void processPayment() {
 		mInitDialog.setOnCancelListener(null);
 		mPayDialog.setOnCancelListener(null);
-		mInitDialog.cancel();
-		mPayDialog.cancel();
+		//mInitDialog.cancel();
+		//mPayDialog.cancel();
 		UI.showCinetProgressDialog(CinetPayText.pay_in_process).setCancelable(
 				false);
 		mPayDialog.unregisterSmsWatcher();
@@ -913,7 +913,11 @@ public final class PayUI {
 				// Log.d("callback is NULL", "" + response);
 			}
 			if (!response.isWaiting()) {
-				dialog = UI.showCinetMessageDialog(message);
+                if (response.hasBeenAccepted()) {
+                    mInitDialog.cancel();
+                    mPayDialog.cancel();
+                }
+				dialog = UI.showCinetMessageDialog(message, !response.hasBeenAccepted());
 			}
 		}
 		return dialog;

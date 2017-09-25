@@ -40,23 +40,25 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                         <TextView
-                             android:id="@+id/cinetpay_txt_message"
-                             android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                             android:textSize="20sp"
-                             android:gravity="start|bottom"
-                             android:textColor="#444" />
+                        <TextView
+                            android:id="@+id/cinetpay_txt_message"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:gravity="start|bottom"
+                            android:textColor="#444" />
+
+                        <Button
+                            android:id="@+id/cinetpay_retry"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/cinetpay_retry"
+                            android:visibility="gone" />
 
                     </LinearLayout>
 
                 </ScrollView>
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="2dp"
-                    android:layout_gravity="bottom"
-                    android:background="#CCC" />
 
             </LinearLayout>
 
