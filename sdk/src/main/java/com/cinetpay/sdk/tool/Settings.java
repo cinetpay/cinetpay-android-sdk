@@ -26,10 +26,10 @@ public final class Settings {
 	static String PREFIX_PATERN_MTN;
 	static String PREFIX_PATERN_MOOV;
 
-	final static String SYNTAX_USSD_ORANGE_DEFAULT = "#144*621*0000#";
+	final static String SYNTAX_USSD_ORANGE_DEFAULT = "#144*621*code_secret#";
 	final static String SYNTAX_USSD_MTN_DEFAULT = "*133*11#";
-	final static String PREFIX_PATERN_ORANGE_DEFAULT = "^[0,4,5,7]{1}[7,8,9]{1}\\d{6}$";
-	final static String PREFIX_PATERN_MTN_DEFAULT = "^[0,4,5]{1}[4,5,6]{1}\\d{6}$";
+	final static String PREFIX_PATERN_ORANGE_DEFAULT = "^[0,4,5,7,8]{1}[7,8,9]{1}\\d{6}$";
+	final static String PREFIX_PATERN_MTN_DEFAULT = "^[0,4,5,7,8]{1}[4,5,6]{1}\\d{6}$";
 	final static String PREFIX_PATERN_MOOV_DEFAULT = "^[0,4]{1}[0,1,2,3]{1}\\d{6}$";
 	public final static HashMap<String, String> CINETPAY_PHONE_NUMBERS = new HashMap<String, String>() {
 		/**
