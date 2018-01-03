@@ -10,3 +10,6 @@ dependencies {
 }
 ```
 
+## Intégration de CinetPay
+
+Le dossier [app](https://github.com/cinetpay/cinetpay-android-sdk/tree/master/app) contient un exemple d'intégration de CinetPay dans une application Android.
