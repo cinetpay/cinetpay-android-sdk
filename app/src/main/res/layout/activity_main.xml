@@ -5,12 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context="com.cinetpay.sdk.example.MainActivity">
+
+    <EditText
+        android:id="@+id/amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number" />
 
     <Button
         android:id="@+id/pay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Payer" />
+        android:text="Payer"
+        android:layout_marginTop="20dp" />
 
 </LinearLayout>
