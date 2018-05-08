@@ -18,8 +18,6 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String TAG = MainActivity.class.getSimpleName();
-
     private String API_KEY = "api_key";
     private String SITE_ID = "site_id";
 
