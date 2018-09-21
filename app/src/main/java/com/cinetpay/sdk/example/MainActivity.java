@@ -18,8 +18,8 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String API_KEY = "api_key";
-    private String SITE_ID = "site_id";
+    private String API_KEY = "API_KEY";
+    private String SITE_ID = "SITE_ID";
 
     private MerchantService CINETPAY_MERCHANT = new MerchantService(API_KEY, SITE_ID);
     private MerchantService CINETPAY_MERCHANT_WITH_URL_NOTIFICATION =
