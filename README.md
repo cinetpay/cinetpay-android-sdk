@@ -1,6 +1,6 @@
 # OBSOLETE
 
-Cette librairie est obsolète. Nous vous recommandons d'utiliser la nouvelle version disponible à cette adresse: [https://github.com/cinetpay/cinetpay-android-sdkjs](https://github.com/cinetpay/cinetpay-android-sdk).
+Cette librairie est obsolète. Nous vous recommandons d'utiliser la nouvelle version disponible à cette adresse: [https://github.com/cinetpay/cinetpay-android-sdkjs](https://github.com/cinetpay/cinetpay-android-sdkjs).
 
 # SDK CinetPay pour Android
 
