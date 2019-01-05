@@ -1,3 +1,7 @@
+# OBSOLETE
+
+Cette librairie est obsolète. Nous vous recommandons d'utiliser la nouvelle version disponible à cette adresse: [https://github.com/cinetpay/cinetpay-android-sdkjs](https://github.com/cinetpay/cinetpay-android-sdk).
+
 # SDK CinetPay pour Android
 
 ## Téléchargement
@@ -6,7 +10,7 @@ Ajoutez la librairie comme dépendance dans votre fichier build.gradle.
 
 ```groovy
 dependencies {
-    compile 'com.cinetpay:sdk:2.7.1'
+    implementation 'com.cinetpay:sdk:2.7.1'
 }
 ```
 
