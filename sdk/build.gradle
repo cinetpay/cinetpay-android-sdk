@@ -3,18 +3,17 @@ apply plugin: 'com.android.library'
 ext {
     PUBLISH_GROUP_ID = 'com.cinetpay'
     PUBLISH_ARTIFACT_ID = 'sdk'
-    PUBLISH_VERSION = '2.7.1'
+    PUBLISH_VERSION = '2.8.0'
 }
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
-        versionName "2.7.1"
+        versionName "2.8.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 

@@ -336,7 +336,7 @@ public final class PayUI {
                 String message = message_operator.replace("%s", "<b><font color=\"black\">"
                         + serviceInfo.syntax_operator_new_momo + "</font></b>");
 
-                txt_operator_message.setText(Html.fromHtml(message));
+                //txt_operator_message.setText(Html.fromHtml(message));
 
             } else if (mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_MOOV_FLOOZ)) {
 
@@ -393,8 +393,8 @@ public final class PayUI {
 					Purchase.PAYMENT_METHOD_MTN_MOBILE_MONEY)) {
 				mPurchase
 						.setPaymentMethod(Purchase.PAYMENT_METHOD_MTN_MOBILE_MONEY);
-				txt_otp.setVisibility(View.VISIBLE);
-				edt_otp.setVisibility(View.VISIBLE);
+				txt_otp.setVisibility(View.GONE);
+				edt_otp.setVisibility(View.GONE);
 				color = 0xFFffc201;
 			} else if (mPurchase.getPaymentMethod().equals(
 					Purchase.PAYMENT_METHOD_ORANGE_MONEY)) {
@@ -443,7 +443,7 @@ public final class PayUI {
                 String message = message_operator.replace("%s", "<b><font color=\"black\">"
                         + serviceInfo.syntax_operator_new_momo + "</font></b>");
 
-                txt_operator_message.setText(Html.fromHtml(message));
+                //txt_operator_message.setText(Html.fromHtml(message));
 
             } else {
                 String message_operator = serviceInfo.message_operator_moov.replace("\n", "")
@@ -455,10 +455,8 @@ public final class PayUI {
                 txt_operator_message.setText(message_operator);
             }
 
-			if ((mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_MTN_MOBILE_MONEY)
-                    && getOtp().length() < 5)
-                    || (mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_ORANGE_MONEY)
-                    && getOtp().length() < 4)) {
+			if (mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_ORANGE_MONEY)
+                    && getOtp().length() < 4) {
 				btn_continue.setEnabled(false);
 			} else {
                 btn_continue.setEnabled(true);
@@ -537,7 +535,7 @@ public final class PayUI {
 			}
 			if (mPurchase.getPaymentMethod().equals(
 					Purchase.PAYMENT_METHOD_MTN_MOBILE_MONEY)) {
-				return otp.matches("\\d{5}");
+				return true;
 			}
 			if (mPurchase.getPaymentMethod().equals(
 					Purchase.PAYMENT_METHOD_MOOV_FLOOZ)) {
@@ -826,7 +824,8 @@ public final class PayUI {
 	private void processPayment() {
 		mInitDialog.setOnCancelListener(null);
 		mPayDialog.setOnCancelListener(null);
-		if (mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_MOOV_FLOOZ)) {
+		if (mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_MOOV_FLOOZ)
+                || mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_MOOV_FLOOZ)) {
             mInitDialog.cancel();
             mPayDialog.cancel();
         }
@@ -919,7 +918,8 @@ public final class PayUI {
 			}
 			if (!response.isWaiting()) {
                 if (response.hasBeenAccepted()
-                        || mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_MOOV_FLOOZ)) {
+                        || mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_MOOV_FLOOZ)
+                        || mPurchase.getPaymentMethod().equals(Purchase.PAYMENT_METHOD_MTN_MOBILE_MONEY)) {
                     mInitDialog.cancel();
                     mPayDialog.cancel();
                 }

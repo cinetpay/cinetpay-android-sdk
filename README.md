@@ -10,7 +10,7 @@ Ajoutez la librairie comme dépendance dans votre fichier build.gradle.
 
 ```groovy
 dependencies {
-    implementation 'com.cinetpay:sdk:2.7.1'
+    implementation 'com.cinetpay:sdk:2.8.0'
 }
 ```
 
